@@ -15,6 +15,7 @@ const User = require("./models/User");
 //Import Routes
 const toughtsRoutes = require("./routes/toughtRoutes");
 const ToughtController = require("./controllers/ToughtController");
+const authRoutes = require("./routes/authRoutes");
 
 //template engine
 app.engine("handlebars", engine());
@@ -65,6 +66,7 @@ app.use((req, res, next) => {
 
 //Routes
 app.use("/toughts", toughtsRoutes);
+app.use("/", authRoutes);
 
 app.use("/", ToughtController.showToughts);
 
