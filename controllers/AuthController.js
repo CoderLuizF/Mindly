@@ -22,6 +22,23 @@ module.exports = class AuthController {
     }
 
     // check if password match database
+    const passwordMatch = bcrypt.compareSync(password, user.password);
+
+    if (!passwordMatch) {
+      req.flash("message", "Senha inválida!");
+      res.render("auth/login");
+
+      return;
+    }
+
+    // initialize session
+    req.session.userid = user.id;
+
+    req.flash("message", "Autenticação realizada com sucesso!");
+
+    req.session.save(() => {
+      res.redirect("/");
+    });
   }
 
   // Register
