@@ -3,10 +3,28 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
 module.exports = class AuthController {
+  // Login
   static login(req, res) {
     res.render("auth/login");
   }
 
+  static async loginPost(req, res) {
+    const { email, password } = req.body;
+
+    // find user
+    const user = await User.findOne({ where: { email: email } });
+
+    if (!user) {
+      req.flash("message", "Usuário não encontrado!");
+      res.render("auth/login");
+
+      return;
+    }
+
+    // check if password match database
+  }
+
+  // Register
   static register(req, res) {
     res.render("auth/register");
   }
@@ -59,6 +77,7 @@ module.exports = class AuthController {
     }
   }
 
+  // Logout
   static logout(req, res) {
     req.session.destroy();
     res.redirect("/login");
