@@ -12,11 +12,20 @@ module.exports = class ToughtController {
       search = req.query.search;
     }
 
+    let order = "DESC";
+
+    if (req.query.order === "old") {
+      order = "ASC";
+    } else {
+      order = "DESC";
+    }
+
     const toughtsData = await Mindly.findAll({
       include: User,
       where: {
         title: { [Op.like]: `%${search}%` },
       },
+     
     });
 
     const toughts = toughtsData.map((result) => result.get({ plain: true }));
@@ -44,6 +53,7 @@ module.exports = class ToughtController {
     // check if user exists
     if (!user) {
       res.redirect("/login");
+      return;
     }
 
     const toughts = user.Mindlies.map((result) => result.dataValues);
