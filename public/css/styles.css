@@ -184,6 +184,18 @@ form input[type="submit"]:hover,
   margin: 0 0.5em;
 }
 
+.dashboard a {
+  color: #f6982d;
+}
+
+.empty-state {
+  color: #888;
+}
+
+.empty-state .btn {
+  margin-top: 1em;
+  display: inline-block;
+}
 
 /* FOOTER */
 footer {

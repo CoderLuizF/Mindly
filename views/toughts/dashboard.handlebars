@@ -18,4 +18,10 @@
       </li>
     {{/each}}
   </ul>
+  {{#if emptyToughts}}
+  <div class="empty-state">
+    <p>Ainda não há nenhum pensamento seu !</p>
+    <p>Comece a criar <a href="/toughts/add" class="btn">seu primeiro pensamento</a></p>
+  </div>
+{{/if}}
 </div>
