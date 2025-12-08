@@ -9,7 +9,7 @@
       <li>
         <span class="label">{{this.title}}</span>
         <span class="actions">
-          <a href="/" class="btn">Editar</a>
+          <a href="/toughts/edit/{{this.id}}" class="btn">Editar</a>
           <form action="/toughts/remove" method="POST">
             <input type="hidden" name="id" value="{{this.id}}" />
             <input type="submit" class="btn" value="Excluir" />
@@ -19,9 +19,10 @@
     {{/each}}
   </ul>
   {{#if emptyToughts}}
-  <div class="empty-state">
-    <p>Ainda não há nenhum pensamento seu !</p>
-    <p>Comece a criar <a href="/toughts/add" class="btn">seu primeiro pensamento</a></p>
-  </div>
-{{/if}}
+    <div class="empty-state">
+      <p>Ainda não há nenhum pensamento seu !</p>
+      <p>Comece a criar
+        <a href="/toughts/add" class="btn">seu primeiro pensamento</a></p>
+    </div>
+  {{/if}}
 </div>

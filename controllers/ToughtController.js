@@ -72,4 +72,12 @@ module.exports = class ToughtController {
       console.log("Aconteceu um erro:" + error);
     }
   }
+
+  static async editTought(req, res) {
+    const id = req.params.id;
+
+    const tought = await Mindly.findOne({ where: { id: id }, raw: true });
+
+    res.render("toughts/edit", { tought });
+  }
 };
