@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const Mindly = require("../models/Mindly");
 const User = require("../models/User");
 
@@ -79,5 +80,25 @@ module.exports = class ToughtController {
     const tought = await Mindly.findOne({ where: { id: id }, raw: true });
 
     res.render("toughts/edit", { tought });
+  }
+
+  static async editToughtSave(req, res) {
+    const id = req.body.id;
+
+    const tought = {
+      title: req.body.title,
+    };
+
+    try {
+      await Mindly.update(tought, { where: { id: id } });
+
+      req.flash("message", "Pensamento atualizado com sucesso!");
+
+      req.session.save(() => {
+        res.redirect("/toughts/dashboard");
+      });
+    } catch (error) {
+      console.log("Aconteceu um erro:" + error);
+    }
   }
 };
